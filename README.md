@@ -1,2 +1,2 @@
-# fh-campus-wfp-SpaceChain
+# fh-campus-wpf-SpaceChain
 Wahlfachprojekt SpaceChain Dapp
