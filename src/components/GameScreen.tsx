@@ -3,8 +3,8 @@ import React from "react";
 const Game = () => {
   return (
     <div className="boxed">
-      <p className="headertext">Here will be the game</p>
-
+      <button className="metamask">Connect</button>
+      <p className="headertext">TEXT TEXT TEXT</p>
       <img className="game" />
     </div>
   );
