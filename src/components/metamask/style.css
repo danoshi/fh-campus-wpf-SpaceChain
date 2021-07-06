@@ -9,20 +9,11 @@
   border-radius: 6px;
 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  line-height: 50px;
+
   font-size: 8pt;
   font-family: tahoma;
   position: absolute;
   bottom: 400px;
   width: 20%;
   right: 40%;
-}
-
-.addressText {
-  font-size: 15pt;
-  width: 100%;
-  position: absolute;
-  text-align: center;
-  color: #ffffff;
-  top: 1%;
 }

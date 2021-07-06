@@ -1,0 +1,17 @@
+.headertext {
+  text-align: center;
+}
+
+.claimButton {
+  content: '';
+
+  line-height: 50px;
+
+  font-size: 8pt;
+  font-family: tahoma;
+
+  position: absolute;
+  bottom: 400px;
+  width: 20%;
+  right: 40%;
+}

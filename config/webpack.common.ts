@@ -60,7 +60,7 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
-    new BundleAnalyzerPlugin({ analyzerMode: CI ? 'disabled' : 'server' }),
+    //new BundleAnalyzerPlugin({ analyzerMode: CI ? 'disabled' : 'server' }),
     new MiniCssExtractPlugin({
       filename: devMode
         ? `${cssDist}/[name].css`

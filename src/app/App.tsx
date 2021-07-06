@@ -6,6 +6,7 @@ import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom';
 import Home from '../components/homescreen/index';
 import Ranking from '../components/rankingsceen';
 import Login from '../components/metamask/login';
+import Claim from '../components/claim/';
 
 import './reset.css';
 import './App.css';
@@ -39,6 +40,9 @@ export const App = () => {
             <Provider store={store}>
               <Login />
             </Provider>
+          </Route>
+          <Route path="/claim" exact>
+            <Claim />
           </Route>
           <Route path="/rankingscreen" exact>
             <Ranking />

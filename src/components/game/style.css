@@ -133,3 +133,10 @@
   display: block;
   height: 0.9em;
 }
+
+.claimBtn {
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  color: #ffffff;
+}

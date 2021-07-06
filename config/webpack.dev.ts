@@ -7,6 +7,7 @@ const config = merge(common, {
   devServer: {
     contentBase: './dist',
     hot: true,
+    open: true,
   },
   optimization: {
     usedExports: true,

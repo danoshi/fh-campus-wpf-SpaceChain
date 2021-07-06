@@ -4,7 +4,6 @@ import './style.css';
 const Home = () => {
   return (
     <div>
-      <button className="metamask">Connect</button>
       <h1 className="headertext">Info über das Projekt</h1>
       <p className="headertext">
         Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy

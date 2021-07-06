@@ -9,6 +9,9 @@ import bonus from 'images/ship.png';
 import jelly from 'images/alien_0-2.png';
 import crab from 'images/alien_1-1.png';
 import octo from 'images/alien_2-2.png';
+import { selectGame } from 'states/game';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const playLetters = stringToLetters('PLAY');
 const titleLetters = stringToLetters('SPACE INVADERS');
@@ -20,78 +23,87 @@ const scoreString = '*SCORE ADVANCE TABLE*';
 const pressString = 'PRESS ANY BUTTON';
 
 const frameInterval = 200;
+const treshold = 30;
 
 export function OpeningStage() {
+  const highScore = useSelector(selectGame.highScore);
   return (
-    <AnimationManager>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '90%', fontSize: '0.7em' }}
-        interval={frameInterval * 3}
-        repeat={true}
-      >
-        {pressString}
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '10%' }}
-        interval={frameInterval}
-      >
-        {playLetters}
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '20%' }}
-        interval={frameInterval}
-      >
-        {titleLetters}
-      </AnimationShow>
-      <AnimationDelay interval={frameInterval} delay={5}></AnimationDelay>
-      <AnimationShow
-        className="opening-stage__rect"
-        showClassName="opening-stage__item--show"
-        style={{ fontSize: '0.9em' }}
-        interval={frameInterval}
-        delay={-1}
-      >
-        <ScoreTable></ScoreTable>
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '50%', left: '6%', fontSize: '0.9em' }}
-        interval={frameInterval}
-      >
-        {bonusPointsLetters}
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '60%', left: '6%', fontSize: '0.9em' }}
-        interval={frameInterval}
-      >
-        {jellyPointsLetters}
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '70%', left: '6%', fontSize: '0.9em' }}
-        interval={frameInterval}
-      >
-        {crabPointsLetters}
-      </AnimationShow>
-      <AnimationShow
-        className="opening-stage__line"
-        showClassName="opening-stage__item--show"
-        style={{ top: '80%', left: '6%', fontSize: '0.9em' }}
-        interval={frameInterval}
-      >
-        {octoPointsLetters}
-      </AnimationShow>
-    </AnimationManager>
+    <div>
+      {highScore >= treshold && (
+        <Link className="claimBtn" to="/claim">
+          Claim Reward
+        </Link>
+      )}
+      <AnimationManager>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '90%', fontSize: '0.7em' }}
+          interval={frameInterval * 3}
+          repeat={true}
+        >
+          {pressString}
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '10%' }}
+          interval={frameInterval}
+        >
+          {playLetters}
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '20%' }}
+          interval={frameInterval}
+        >
+          {titleLetters}
+        </AnimationShow>
+        <AnimationDelay interval={frameInterval} delay={5}></AnimationDelay>
+        <AnimationShow
+          className="opening-stage__rect"
+          showClassName="opening-stage__item--show"
+          style={{ fontSize: '0.9em' }}
+          interval={frameInterval}
+          delay={-1}
+        >
+          <ScoreTable></ScoreTable>
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '50%', left: '6%', fontSize: '0.9em' }}
+          interval={frameInterval}
+        >
+          {bonusPointsLetters}
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '60%', left: '6%', fontSize: '0.9em' }}
+          interval={frameInterval}
+        >
+          {jellyPointsLetters}
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '70%', left: '6%', fontSize: '0.9em' }}
+          interval={frameInterval}
+        >
+          {crabPointsLetters}
+        </AnimationShow>
+        <AnimationShow
+          className="opening-stage__line"
+          showClassName="opening-stage__item--show"
+          style={{ top: '80%', left: '6%', fontSize: '0.9em' }}
+          interval={frameInterval}
+        >
+          {octoPointsLetters}
+        </AnimationShow>
+      </AnimationManager>
+    </div>
   );
 }
 
