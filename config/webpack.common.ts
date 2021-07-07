@@ -7,6 +7,8 @@ import CopyPlugin from 'copy-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+
 const jsDist = 'js';
 const cssDist = 'css';
 
@@ -59,6 +61,7 @@ const config: webpack.Configuration = {
     },
   },
   plugins: [
+    new NodePolyfillPlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     //new BundleAnalyzerPlugin({ analyzerMode: CI ? 'disabled' : 'server' }),
     new MiniCssExtractPlugin({

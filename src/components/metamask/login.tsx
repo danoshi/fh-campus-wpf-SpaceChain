@@ -65,9 +65,9 @@ class Login extends React.Component<Iprops, Istate> {
             {!this.state.login ? 'Connect' : 'Connected'}
           </button>
           {this.state.error && (
-            <div style={{ color: 'white' }}>
-              '🦊 You must install Metamask into your browser:
-              https://metamask.io/download.html',
+            <div className="headertext" style={{ color: 'white' }}>
+              To access the game you must install Metamask into your browser:
+              https://metamask.io/download.html 🦊
             </div>
           )}
         </div>
