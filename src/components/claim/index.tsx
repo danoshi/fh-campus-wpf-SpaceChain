@@ -14,6 +14,9 @@ const contractABI = require('./contract-abi.json');
 const contractAddress = '0x4C4a07F737Bf57F6632B6CAB089B78f62385aCaE';
 
 export interface Iprops {}
+export interface Istate {
+  txn: boolean;
+}
 
 declare global {
   interface Window {
@@ -30,55 +33,212 @@ declare global {
   }
 }
 
-class Claim extends React.Component<Iprops> {
+class Claim extends React.Component<Iprops, Istate> {
   [x: string]: any;
-
   constructor(props: Iprops) {
     super(props);
+    this.state = { ...this.state, txn: false };
+  }
+
+  setTXNStatus() {
+    this.setState({ ...this.state, txn: true });
+  }
+
+  mintNFT = async () => {
+    let name = 'Spaceship';
+    let url =
+      'https://ipfs.io/ipfs/QmUZAtXKH3iPm5RezXdirY3JZA3pPumuNnTTBG15RWpk8r';
+    let description =
+      'This is the reward for your first achievement. To access it please open the ipfs link!';
+    if (url.trim() === '' || name.trim() === '' || description.trim() === '') {
+      return {
+        success: false,
+        status: '❗Please make sure all fields are completed before minting.',
+      };
+    }
 
     //make metadata
     const metadata = new Object();
-    metadata.name = 'Spaceship';
-    metadata.image =
-      'https://ipfs.io/ipfs/QmUZAtXKH3iPm5RezXdirY3JZA3pPumuNnTTBG15RWpk8r';
-    metadata.description = 'This is the reward for your first achievement';
-  }
+    metadata.name = name;
+    metadata.image = url;
+    metadata.description = description;
 
-  pinataResponse: any = async () => {
-    this.tokenURI = await pinJSONToIPFS(this.metadata);
-  };
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: '😢 Something went wrong while uploading your tokenURI.',
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
 
-  tokenURI = this.pinataResponse.pinataUrl;
-
-  mintNFT = async () => {
     window.contract = await new web3.eth.Contract(contractABI, contractAddress);
 
-    //set up your Ethereum transaction
     const transactionParameters = {
       to: contractAddress, // Required except during contract publications.
       from: window.ethereum.selectedAddress, // must match user's active address.
       data: window.contract.methods
-        .mintNFT(window.ethereum.selectedAddress, this.tokenURI)
+        .mintNFT(window.ethereum.selectedAddress, tokenURI)
         .encodeABI(),
     };
 
-    //sign the transaction via Metamask
     try {
       const txHash = await window.ethereum.request({
         method: 'eth_sendTransaction',
         params: [transactionParameters],
       });
-      return {
-        success: true,
-        status:
+      return (
+        console.log(
           '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
-          txHash,
-      };
+            txHash,
+        ),
+        {
+          success: true,
+          status:
+            '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
+            txHash,
+        }
+      );
     } catch (error) {
+      return (
+        console.log('😥 Something went wrong: ' + error.message),
+        {
+          success: false,
+          status: '😥 Something went wrong: ' + error.message,
+        }
+      );
+    }
+  };
+
+  mintNFT2 = async () => {
+    let name = 'Spaceship 2';
+    let url =
+      'https://ipfs.io/ipfs/QmYJVQj6MC3VzgVF9PQxsxHA54kX7M2Jt12cHCXJhQCT8e';
+    let description =
+      'This is the reward for your second achievement. To access it please open the ipfs link!';
+    if (url.trim() === '' || name.trim() === '' || description.trim() === '') {
       return {
         success: false,
-        status: '😥 Something went wrong: ' + error.message,
+        status: '❗Please make sure all fields are completed before minting.',
       };
+    }
+
+    //make metadata
+    const metadata = new Object();
+    metadata.name = name;
+    metadata.image = url;
+    metadata.description = description;
+
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: '😢 Something went wrong while uploading your tokenURI.',
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
+
+    window.contract = await new web3.eth.Contract(contractABI, contractAddress);
+
+    const transactionParameters = {
+      to: contractAddress, // Required except during contract publications.
+      from: window.ethereum.selectedAddress, // must match user's active address.
+      data: window.contract.methods
+        .mintNFT(window.ethereum.selectedAddress, tokenURI)
+        .encodeABI(),
+    };
+
+    try {
+      const txHash = await window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+      });
+      return (
+        console.log(
+          '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
+            txHash,
+        ),
+        {
+          success: true,
+          status:
+            '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
+            txHash,
+        }
+      );
+    } catch (error) {
+      return (
+        console.log('😥 Something went wrong: ' + error.message),
+        {
+          success: false,
+          status: '😥 Something went wrong: ' + error.message,
+        }
+      );
+    }
+  };
+
+  mintNFT3 = async () => {
+    let name = 'Spaceship 3';
+    let url =
+      'https://ipfs.io/ipfs/QmfJNPWK5E6HFKWcfFamsGMrMamNAFYa6pQQCnNen2TLFL';
+    let description =
+      'This is the reward for your third achievement. To access it please open the ipfs link!';
+    if (url.trim() === '' || name.trim() === '' || description.trim() === '') {
+      return {
+        success: false,
+        status: '❗Please make sure all fields are completed before minting.',
+      };
+    }
+
+    //make metadata
+    const metadata = new Object();
+    metadata.name = name;
+    metadata.image = url;
+    metadata.description = description;
+
+    const pinataResponse = await pinJSONToIPFS(metadata);
+    if (!pinataResponse.success) {
+      return {
+        success: false,
+        status: '😢 Something went wrong while uploading your tokenURI.',
+      };
+    }
+    const tokenURI = pinataResponse.pinataUrl;
+
+    window.contract = await new web3.eth.Contract(contractABI, contractAddress);
+
+    const transactionParameters = {
+      to: contractAddress, // Required except during contract publications.
+      from: window.ethereum.selectedAddress, // must match user's active address.
+      data: window.contract.methods
+        .mintNFT(window.ethereum.selectedAddress, tokenURI)
+        .encodeABI(),
+    };
+
+    try {
+      const txHash = await window.ethereum.request({
+        method: 'eth_sendTransaction',
+        params: [transactionParameters],
+      });
+      return (
+        console.log(
+          '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
+            txHash,
+        ),
+        {
+          success: true,
+          status:
+            '✅ Check out your transaction on Etherscan: https://ropsten.etherscan.io/tx/' +
+            txHash,
+        }
+      );
+    } catch (error) {
+      return (
+        console.log('😥 Something went wrong: ' + error.message),
+        {
+          success: false,
+          status: '😥 Something went wrong: ' + error.message,
+        }
+      );
     }
   };
 
@@ -100,10 +260,10 @@ class Claim extends React.Component<Iprops> {
           <button
             className="claimButton2"
             onClick={async () => {
-              this.mintNFT();
+              this.mintNFT2();
             }}
           >
-            Not available yet
+            Claim
           </button>
         </div>
         <div>
@@ -111,10 +271,10 @@ class Claim extends React.Component<Iprops> {
           <button
             className="claimButton3"
             onClick={async () => {
-              this.mintNFT();
+              this.mintNFT3();
             }}
           >
-            Not available yet
+            Claim
           </button>
         </div>
       </div>

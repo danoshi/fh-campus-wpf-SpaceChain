@@ -13,11 +13,16 @@ const pinJSONToIPFS = async (JSONBody: any) => {
       },
     })
     .then(function (response: any) {
-      return {
-        success: true,
-        pinataUrl:
+      return (
+        console.log(
           'https://gateway.pinata.cloud/ipfs/' + response.data.IpfsHash,
-      };
+        ),
+        {
+          success: true,
+          pinataUrl:
+            'https://gateway.pinata.cloud/ipfs/' + response.data.IpfsHash,
+        }
+      );
     })
     .catch(function (error: any) {
       console.log(error);
