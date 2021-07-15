@@ -56,6 +56,11 @@ class Login extends React.Component<Iprops, Istate> {
     } else
       return (
         <div style={{ color: 'white' }}>
+          <h1 className="headertext">
+            To access the Game please connect your wallet by clicking the
+            button. To be able to claim your first NFT reward you must need to
+            achieve at least 30 points!
+          </h1>
           <button
             className="metamask"
             onClick={async () => {
@@ -65,9 +70,9 @@ class Login extends React.Component<Iprops, Istate> {
             {!this.state.login ? 'Connect' : 'Connected'}
           </button>
           {this.state.error && (
-            <div style={{ color: 'white' }}>
-              '🦊 You must install Metamask into your browser:
-              https://metamask.io/download.html',
+            <div className="headertext" style={{ color: 'white' }}>
+              To access the game you must install Metamask into your browser:
+              https://metamask.io/download.html 🦊
             </div>
           )}
         </div>
